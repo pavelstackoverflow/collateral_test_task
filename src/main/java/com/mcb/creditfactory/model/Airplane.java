@@ -14,19 +14,23 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "CAR")
-public class Car {
+@Table(name = "AIRPLANE")
+public class Airplane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String brand;
     private String model;
-    private Double power;
+    private String manufacturer;
+    @Column(name = "fuel_capacity")
+    private Integer fuelCapacity;
+    private Integer seats;
 
     @Column(name = "year_of_issue")
     private Short year;
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-    private Set<CarAssessment> carAssessments;
+    @OneToMany(mappedBy = "airplane", cascade = CascadeType.ALL)
+    private Set<AirplaneAssessment> airplaneAssessments;
 
 }
+

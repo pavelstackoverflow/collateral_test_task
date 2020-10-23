@@ -20,8 +20,8 @@ public class ExternalApproveService {
     public int approve(CollateralObject object) {
         if (object.getDate() == null ||object.getYear() == null || object.getValue() == null || object.getType() == null) {
             return -1;
-        }
 
+        }
         int code;
         switch (object.getType()) {
             case CAR: code = approveCar(object); break;
@@ -48,10 +48,10 @@ public class ExternalApproveService {
 
     private int approvePlane(CollateralObject object) {
         if (object.getYear() < MIN_PLANE_YEAR) {
-            return -20;
+             return -20;
         }
         if (object.getDate().isBefore(MIN_ASSESS_DATE)) {
-            return -21;
+             return -21;
         }
         if (object.getValue().compareTo(MIN_PLANE_VALUE) < 0) {
             return -22;

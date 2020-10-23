@@ -1,7 +1,7 @@
-package com.mcb.creditfactory.service.car;
+package com.mcb.creditfactory.service.airplane;
 
+import com.mcb.creditfactory.dto.AirplaneDto;
 import com.mcb.creditfactory.dto.AssessmentDto;
-import com.mcb.creditfactory.dto.CarDto;
 import com.mcb.creditfactory.external.CollateralObject;
 import com.mcb.creditfactory.external.CollateralType;
 import lombok.AllArgsConstructor;
@@ -11,14 +11,14 @@ import java.time.LocalDate;
 import java.util.Comparator;
 
 @AllArgsConstructor
-public class CarAdapter implements CollateralObject {
-    private CarDto car;
+public class AirplaneAdapter implements CollateralObject {
+    private AirplaneDto airplaneDto;
 
     @Override
     public BigDecimal getValue() {
         BigDecimal value = null;
-        if (car.getAssessmentDtos()!=null) {
-            AssessmentDto assessmentDto = car.getAssessmentDtos().stream()
+        if (airplaneDto.getAssessmentDtos()!=null) {
+            AssessmentDto assessmentDto = airplaneDto.getAssessmentDtos().stream()
                     .max(Comparator.comparing(AssessmentDto::getDate)).orElse(null);
             value = (assessmentDto != null && assessmentDto.getValue() != null) ? assessmentDto.getValue() : null;
         }
@@ -27,14 +27,14 @@ public class CarAdapter implements CollateralObject {
 
     @Override
     public Short getYear() {
-        return car.getYear();
+        return airplaneDto.getYear();
     }
 
     @Override
     public LocalDate getDate() {
         LocalDate date = null;
-        if (car.getAssessmentDtos()!=null) {
-            AssessmentDto assessmentDto = car.getAssessmentDtos().stream()
+        if (airplaneDto.getAssessmentDtos()!=null) {
+            AssessmentDto assessmentDto = airplaneDto.getAssessmentDtos().stream()
                     .max(Comparator.comparing(AssessmentDto::getDate)).orElse(null);
             date = (assessmentDto != null && assessmentDto.getDate() != null) ? assessmentDto.getDate() : null;
         }
@@ -43,6 +43,6 @@ public class CarAdapter implements CollateralObject {
 
     @Override
     public CollateralType getType() {
-        return CollateralType.CAR;
+        return CollateralType.AIRPLANE;
     }
 }
